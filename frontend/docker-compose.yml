@@ -1,0 +1,12 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: compose/Dockerfile
+    image: local_frontend
+    volumes:
+      - .:/app
+    ports:
+      - 8080:8080
+    command:  /start

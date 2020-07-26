@@ -1,0 +1,49 @@
+version: '3'
+
+volumes:
+  production_postgres_data: {}
+  production_postgres_data_backups: {}
+
+services:
+  django: &django
+    build:
+      context: ./backend
+      dockerfile: compose/django/local/Dockerfile
+    image: pryecto_local_django
+    depends_on:
+      - postgres
+      - vuejs
+    env_file:
+      - ./backend/.envs/.local/.django
+      - ./backend/.envs/.local/.postgres
+    volumes:
+      - './backend:/app'
+    ports:
+      - '8000:8000'
+    command: /start
+
+  vuejs:
+    build:
+      context: ./frontend
+      dockerfile: compose/Dockerfile
+    image: pryecto_local_vuejs
+    volumes:
+      - './frontend:/app'
+    ports:
+      - '8080:8080'
+    command:  /start
+
+  postgres:
+    build:
+      context: ./backend
+      dockerfile: compose/postgres/Dockerfile
+    image: pryecto_local_postgres
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data
+      - production_postgres_data_backups:/backups
+    ports:
+      - '5432:5432'
+    env_file:
+      - ./backend/.envs/.local/.postgres
+
+
