@@ -125,7 +125,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.id)
     this.getPelicula()
   },
   methods: {

@@ -79,7 +79,6 @@
 export default {
   layout: 'main',
   name: 'PageIndex',
-  middleware: 'auth',
   data () {
     return { 
       pagina: 1,

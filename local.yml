@@ -9,7 +9,7 @@ services:
     build:
       context: ./backend
       dockerfile: compose/django/local/Dockerfile
-    image: pryecto_local_django
+    image: proyecto_local_django
     depends_on:
       - postgres
       - vuejs
@@ -26,7 +26,7 @@ services:
     build:
       context: ./frontend
       dockerfile: compose/Dockerfile
-    image: pryecto_local_vuejs
+    image: proyecto_local_vuejs
     volumes:
       - './frontend:/app'
     ports:
@@ -37,7 +37,7 @@ services:
     build:
       context: ./backend
       dockerfile: compose/postgres/Dockerfile
-    image: pryecto_local_postgres
+    image: proyecto_local_postgres
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
