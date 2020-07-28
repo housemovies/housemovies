@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Pelicula, Menu, MenuPelicula
+from .models import Pelicula, Menu, MenuPelicula, ImagenesMuestra, Busqueda
 
 
 class PeliculaAdmin(admin.ModelAdmin):
@@ -21,6 +21,6 @@ class MenuPeliculaAdmin(admin.ModelAdmin):
 
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(MenuPelicula, MenuPeliculaAdmin)
+admin.site.register(ImagenesMuestra)
 admin.site.register(Pelicula, PeliculaAdmin)
-# admin.site.register(ImagenesMuestra)
-# admin.site.register(Busqueda)
+admin.site.register(Busqueda)
