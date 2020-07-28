@@ -60,11 +60,11 @@ class MenuPelicula(BaseModel):
 
 class ImagenesMuestra(BaseModel):
     imagen = models.FileField(upload_to='carousel', blank=True, null=True) 
-    pelicula = models.ForeignKey(
-        Pelicula,
-        on_delete=models.CASCADE,
-        related_name='imagen_pelicula'
-    )
+    # pelicula = models.ForeignKey(
+    #     Pelicula,
+    #     on_delete=models.CASCADE,
+    #     related_name='imagen_pelicula'
+    # )
 
     def __str__(self):
         """Return post title."""
