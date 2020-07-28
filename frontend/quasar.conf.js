@@ -108,11 +108,6 @@ module.exports = function (/* ctx */) {
           secure: false,
           changeOrigin: true
         },
-        '/static/**': {
-          target: 'http://django:8000/',
-          secure: false,
-          changeOrigin: true
-        },
         '/media/**': {
           target: 'http://django:8000/',
           secure: false,
