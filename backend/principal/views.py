@@ -7,8 +7,8 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import get_object_or_404
 from rest_framework.decorators import action
 
-from principal.models import Menu, Pelicula, MenuPelicula, ImagenesMuestra
-from principal.serializers import UserFindSerializer, UserLoginSerializer, MenuSerializer, MenuPeliculaSerializer, PeliculaSerializer, ImagenesMuestraSerializer
+from principal.models import Menu, Pelicula, MenuPelicula
+from principal.serializers import UserFindSerializer, UserLoginSerializer, MenuSerializer, MenuPeliculaSerializer, PeliculaSerializer
 import pdb
 
 class MenuViewSet(ModelViewSetClass):
@@ -56,17 +56,17 @@ class PeliculaViewSet(ModelViewSetClass):
         serializer = PeliculaSerializer(obj_pelicula)
         return Response(serializer.data)
     
-class ImagenMuestraViewSet(ModelViewSetClass):
-    # permission_classes = ()
-    queryset = ImagenesMuestra.objects.filter(delete=None)
-    serializer_class = ImagenesMuestraSerializer
-    filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ['nombre']
+# class ImagenMuestraViewSet(ModelViewSetClass):
+#     # permission_classes = ()
+#     queryset = ImagenesMuestra.objects.filter(delete=None)
+#     serializer_class = ImagenesMuestraSerializer
+#     filter_backends = (SearchFilter, OrderingFilter)
+#     search_fields = ['nombre']
 
-    def list(self, request, *args, **kwargs):
-        query = self.get_queryset()
-        data = ImagenesMuestraSerializer(query, many=True).data
-        return Response(data)
+#     def list(self, request, *args, **kwargs):
+#         query = self.get_queryset()
+#         data = ImagenesMuestraSerializer(query, many=True).data
+#         return Response(data)
 
 
 
