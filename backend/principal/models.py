@@ -65,7 +65,6 @@ class ImagenesMuestra(BaseModel):
     #     on_delete=models.CASCADE,
     #     related_name='imagen_pelicula'
     # )
-
     def __str__(self):
         """Return post title."""
         return '{}'.format(self.imagen, )
