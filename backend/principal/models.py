@@ -58,21 +58,21 @@ class MenuPelicula(BaseModel):
         """Meta class."""
         db_table = 'principal_menus_peliculas'
 
-class ImagenesMuestra(BaseModel):
-    imagen = models.FileField(upload_to='carousel', blank=True, null=True) 
-    pelicula = models.ForeignKey(
-        Pelicula,
-        on_delete=models.CASCADE,
-        related_name='imagen_pelicula'
-    )
+# class ImagenesMuestra(BaseModel):
+#     imagen = models.FileField(upload_to='carousel', blank=True, null=True) 
+#     pelicula = models.ForeignKey(
+#         Pelicula,
+#         on_delete=models.CASCADE,
+#         related_name='imagen_pelicula'
+#     )
 
-    def __str__(self):
-        """Return post title."""
-        return '{}'.format(self.imagen, )
-    class Meta:
-        """Meta class."""
-        db_table = 'principal_imagenes_muestra'
-        ordering = ['-created', '-modified']
+#     def __str__(self):
+#         """Return post title."""
+#         return '{}'.format(self.imagen, )
+#     class Meta:
+#         """Meta class."""
+#         db_table = 'principal_imagenes_muestra'
+#         ordering = ['-created', '-modified']
 
 # class Busqueda(BaseModel):
 #     texto = models.CharField(max_length=240, blank=True, null=True)
