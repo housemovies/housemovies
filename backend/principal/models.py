@@ -3,7 +3,7 @@ from utils.models import BaseModel
 
 class Pelicula(BaseModel):
     titulo = models.CharField(max_length=255, help_text="Titulo")
-    subtitulo = models.CharField(max_length=255, help_text="subtitulo")
+    subtitulo = models.CharField(max_length=255, help_text="subtitulo", blank=True, null=True)
     año = models.IntegerField(blank=True, null=True)
     duracion = models.CharField(max_length=255, blank=True, null=True, help_text="duracion")
     sinopsis = models.TextField(blank=True, null=True, help_text="sinopsis")

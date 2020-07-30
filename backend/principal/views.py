@@ -9,6 +9,7 @@ from rest_framework.decorators import action
 
 from principal.models import Menu, Pelicula, MenuPelicula
 from principal.serializers import UserFindSerializer, UserLoginSerializer, MenuSerializer, MenuPeliculaSerializer, PeliculaSerializer
+from utils.view import Views
 import pdb
 
 class MenuViewSet(ModelViewSetClass):
@@ -41,7 +42,7 @@ class PeliculaViewSet(ModelViewSetClass):
     queryset = Pelicula.objects.filter(delete=None).order_by('-vistas')
     serializer_class = PeliculaSerializer
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ['nombre']
+    search_fields = ['titulo','subtitulo']
 
     @action(methods=['get'], detail=False,url_path='ultimas')
     def ultimas(self, request ): 
@@ -62,6 +63,15 @@ class PeliculaViewSet(ModelViewSetClass):
         serializer = PeliculaSerializer(obj_pelicula)
         return Response(serializer.data)
 
+    @action(methods=['get'], detail=False, url_path='select')
+    def select(self, request):
+        return Response(Views.select(
+            request=request,
+            filtro={'titulo__icontains': 'search', 'subtitulo__icontains': 'search'},
+            model=Pelicula.objects.filter(delete=None).order_by('-vistas'),
+            values=['id','titulo','subtitulo','ruta','año','duracion','imagen'],
+            limit=3
+        ))
 
 
 
