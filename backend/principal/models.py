@@ -3,7 +3,7 @@ from utils.models import BaseModel
 
 class Pelicula(BaseModel):
     titulo = models.CharField(max_length=255, help_text="Titulo")
-    subtitulo = models.CharField(max_length=255, help_text="subtitulo", blank=True, null=True)
+    subtitulo = models.CharField(max_length=255, help_text="subtitulo")
     año = models.IntegerField(blank=True, null=True)
     duracion = models.CharField(max_length=255, blank=True, null=True, help_text="duracion")
     sinopsis = models.TextField(blank=True, null=True, help_text="sinopsis")
@@ -13,6 +13,8 @@ class Pelicula(BaseModel):
     rutasp = (('PeliculasDetalle','PeliculasDetalle'),)
     ruta = models.CharField(max_length=240, choices = rutasp, default='PeliculasDetalle', blank=True, null=True)
     vistas = models.IntegerField(default = 0, blank=True, null=True)  
+    carousel = models.BooleanField(help_text="carousel",default=False)
+    imagen_carousel = models.FileField(upload_to='bita_archivos', blank=True, null=True)
     
     def __str__(self):
         """Return post title."""
@@ -57,22 +59,6 @@ class MenuPelicula(BaseModel):
     class Meta:
         """Meta class."""
         db_table = 'principal_menus_peliculas'
-
-class ImagenesMuestra(BaseModel):
-    imagen = models.FileField(upload_to='carousel', blank=True, null=True) 
-    # pelicula = models.ForeignKey(
-    #     Pelicula,
-    #     on_delete=models.CASCADE,
-    #     related_name='imagen_pelicula'
-    # )
-
-    def __str__(self):
-        """Return post title."""
-        return '{}'.format(self.imagen, )
-    class Meta:
-        """Meta class."""
-        db_table = 'principal_imagenes_muestra'
-        ordering = ['-created', '-modified']
 
 class Busqueda(BaseModel):
     texto = models.CharField(max_length=240, blank=True, null=True)

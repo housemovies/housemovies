@@ -22,7 +22,7 @@
                     {{pelicula.titulo}}
                   </div>
                   <div class="col-2 text-subtitle2">
-                    <q-btn clickable  outline rounded  color="black" size="md" label="Triller" style="margin-left: 5px;"  type="a" target="_blank"  href="https://www.youtube.com/watch?v=UVPkb6WEBV0" />
+                    <q-btn clickable  outline rounded  color="black" size="md" label="Triller" style="margin-left: 5px;"  type="a" target="_blank" :href="pelicula.triller" />
                   </div>
                   <div v-if="pelicula.subtitulo" class="col-12 text-subtitle2">
                     {{pelicula.subtitulo}}

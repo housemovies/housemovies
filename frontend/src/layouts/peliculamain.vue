@@ -13,11 +13,7 @@
         @mouseenter="autoplay = false"
         @mouseleave="autoplay = true"
       >
-        <q-carousel-slide :name="key"  v-for="(item, key) in imagenes" :key="key"  :img-src="item.imagen" />
-        <!-- <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
-        <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
-        <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
-        <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" /> -->
+        <q-carousel-slide :name="key"  v-for="(item, key) in imagenes" :key="key"  :img-src="item.imagen_carousel" />
       </q-carousel>
     </div>
     <q-layout view="lHh Lpr lFf" class="WAL__layout shadow-9" container>
@@ -106,7 +102,7 @@ export default {
     },
     async getImagenesMuestra () {
       try {
-        this.imagenes = await this.Get('principal/imagen_muestra')
+        this.imagenes = await this.Get('principal/pelicula/carousel')
       } catch ({ message }) {
         console.error(message)
       }

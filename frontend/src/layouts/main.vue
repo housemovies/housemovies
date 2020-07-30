@@ -13,25 +13,22 @@
         @mouseleave="autoplay = true"
         style="height: 550px;opacity: 0.9;"
       >
-        <q-carousel-slide position="top" :name="key"  v-for="(item, key) in imagenes" :key="key"  :img-src="item.imagen" >
+        <q-carousel-slide position="top" :name="key"  v-for="(item, key) in imagenes" :key="key"  :img-src="item.imagen_carousel" >
           <br><br><br>
-          <div class="col-12  text-h3 q-pl-xl q-pa-md  text-white ">
-            prueba de texto para mostrar
+          <div class="col-12 col-sm-12  text-h3 q-pl-xl q-pa-md  text-white ">
+            {{item.titulo}}
           </div>
           <div class="col-12  text-subtitle1 q-pl-xl  q-pb-md text-white ">
-            <q-icon class="text-h6 q-pb-sm" color="white" name="theaters" /> 2020 <q-icon class="text-h6 q-pb-sm" color="white" name="alarm" /> 90 Minutos
+            <q-icon class="text-h6 q-pb-sm" color="white" name="theaters" /> {{item.año}} <q-icon class="text-h6 q-pb-sm" color="white" name="alarm" /> {{item.duracion}}
           </div>
           <div class="col-12  text-subtitle1 q-pl-xl q-pb-md text-white ">
-            Texto mas largo de prueba para la sipnosis
+            {{item.sinopsis}}
           </div>
           <div class="col-2 text-subtitle2 q-pl-xl text-white">
-            <q-btn clickable  outline rounded  color="white" size="md" label="Ver Pelicula" style="margin-left: 5px;"  type="a" target="_blank"  href="https://www.youtube.com/watch?v=UVPkb6WEBV0" />
-            <q-btn clickable  outline rounded  color="white" size="md" label="Ver Triller" style="margin-left: 5px;"  type="a" target="_blank"  href="https://www.youtube.com/watch?v=UVPkb6WEBV0" />
+            <q-btn clickable  outline rounded  color="white" size="md" label="Ver Pelicula" style="margin-left: 5px;"  type="a" target="_blank" @click="redirigir(item)" />
+            <q-btn clickable  outline rounded  color="white" size="md" label="Ver Triller" style="margin-left: 5px;"  type="a" target="_blank"  :href="item.triller" />
           </div>
         </q-carousel-slide>
-        <!-- <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/parallax1.jpg" /> -->
-        <!-- <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
-        <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" /> -->
       </q-carousel>
     </div>
     <q-layout view="lHh Lpr lFf" class="WAL__layout shadow-9 q-mb-sm" style="height: 70%;margin-bottom: 2%;" container>
@@ -64,6 +61,9 @@
           <q-avatar class="cursor-pointer">
             <img src="https://cdn.quasar.dev/app-icons/icon-128x128.png" />
           </q-avatar>
+          <div class="text-subtitle1 q-pl-md ">
+            Categorias
+          </div>
           <q-space />
         </q-toolbar>
 <!-- 
@@ -132,10 +132,13 @@ export default {
     },
     async getImagenesMuestra () {
       try {
-        this.imagenes = await this.Get('principal/imagen_muestra')
+        this.imagenes = await this.Get('principal/pelicula/carousel')
       } catch ({ message }) {
         console.error(message)
       }
+    },
+    redirigir (item) {
+      this.$router.push({ name: item.ruta, params: { id: (item.id).toString() } })
     }
   }
 }

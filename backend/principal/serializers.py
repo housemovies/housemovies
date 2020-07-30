@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from principal.models import Menu, MenuPelicula, Pelicula, ImagenesMuestra
+from principal.models import Menu, MenuPelicula, Pelicula
 from django.conf import settings
 
 
@@ -89,19 +89,8 @@ class PeliculaSerializer(serializers.ModelSerializer):
             'mp_pelicula',
             'imagen',
             'triller',
-            
+            'imagen_carousel'
         )
-
-class ImagenesMuestraSerializer(serializers.ModelSerializer):
-    """imagenes model serializer."""
-    class Meta:
-        """Meta class."""
-        model = ImagenesMuestra
-        fields = (
-            'id',
-            'imagen',
-        )
-
 
 
 

@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .models import Pelicula, Menu, MenuPelicula, ImagenesMuestra, Busqueda
+from .models import Pelicula, Menu, MenuPelicula, Busqueda
 
 
 class PeliculaAdmin(admin.ModelAdmin):
     list_display=('titulo','subtitulo')
-    list_filter = ('titulo','subtitulo')
+    list_filter = ('carousel',)
     search_fields = ("titulo", )
 
 
@@ -21,6 +21,6 @@ class MenuPeliculaAdmin(admin.ModelAdmin):
 
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(MenuPelicula, MenuPeliculaAdmin)
-admin.site.register(ImagenesMuestra)
+# admin.site.register(ImagenesMuestra)
 admin.site.register(Pelicula, PeliculaAdmin)
 admin.site.register(Busqueda)

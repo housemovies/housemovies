@@ -7,8 +7,8 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import get_object_or_404
 from rest_framework.decorators import action
 
-from principal.models import Menu, Pelicula, MenuPelicula, ImagenesMuestra
-from principal.serializers import UserFindSerializer, UserLoginSerializer, MenuSerializer, MenuPeliculaSerializer, PeliculaSerializer, ImagenesMuestraSerializer
+from principal.models import Menu, Pelicula, MenuPelicula
+from principal.serializers import UserFindSerializer, UserLoginSerializer, MenuSerializer, MenuPeliculaSerializer, PeliculaSerializer
 import pdb
 
 class MenuViewSet(ModelViewSetClass):
@@ -49,30 +49,18 @@ class PeliculaViewSet(ModelViewSetClass):
         data = PeliculaSerializer(query, many=True).data
         return Response(data)
 
+    @action(methods=['get'], detail=False,url_path='carousel')
+    def carousel(self, request ): 
+        query = self.get_queryset().filter(carousel=True).order_by('-created')[:15]
+        data = PeliculaSerializer(query, many=True).data
+        return Response(data)
+
     def retrieve(self, request, *args, **kwargs):
         obj_pelicula = Pelicula.objects.get(pk=kwargs['pk'])
         obj_pelicula.vistas = obj_pelicula.vistas + 1
         obj_pelicula.save()
         serializer = PeliculaSerializer(obj_pelicula)
         return Response(serializer.data)
-    
-class ImagenMuestraViewSet(ModelViewSetClass):
-    # permission_classes = ()
-    queryset = ImagenesMuestra.objects.filter(delete=None)
-    serializer_class = ImagenesMuestraSerializer
-    filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ['nombre']
-
-    def list(self, request, *args, **kwargs):
-        query = self.get_queryset()
-        data = ImagenesMuestraSerializer(query, many=True).data
-        return Response(data)
-
-
-
-
-
-
 
 
 
