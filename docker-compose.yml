@@ -14,7 +14,6 @@ services:
     image: proyecto_production_nginx
     volumes:
       - django-static:/usr/src/app/static
-    volumes:
       - django-media:/usr/src/app/media
     depends_on:
       - django
@@ -33,7 +32,6 @@ services:
       - ./backend/.envs/.production/.postgres
     volumes:
       - django-static:/app/static
-    volumes:
       - django-media:/app/media
     command: /start
 
