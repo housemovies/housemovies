@@ -3,6 +3,7 @@ version: '3'
 volumes:
   production_postgres_data: {}
   django-static: {}
+  django-media: {}
 
 services:
   nginx:
