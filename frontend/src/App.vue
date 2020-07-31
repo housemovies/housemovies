@@ -37,7 +37,6 @@ export default {
         layout = this.defaultLayout
       }
       this.layout = layouts[layout]
-      console.log(this.layout)
     }
   }
 }

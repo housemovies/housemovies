@@ -43,7 +43,8 @@ class MenuPeliculaSerializer(serializers.ModelSerializer):
             'menu',
             'menu_id',
             'pelicula_id',
-            'pelicula'
+            'pelicula',
+            'vistas'
         )
         read_only_fields = ('id',)
 

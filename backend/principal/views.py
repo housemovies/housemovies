@@ -26,16 +26,23 @@ class MenuViewSet(ModelViewSetClass):
 
 
 class MenuPeliculaViewSet(ModelViewSetClass):
-    queryset = MenuPelicula.objects.filter(delete=None)
+    queryset = MenuPelicula.objects.filter(delete=None).order_by('-vistas')
     serializer_class = MenuPeliculaSerializer
 
     def retrieve(self, request, *args, **kwargs):
-        item = MenuPelicula.objects.filter(menu_id=kwargs['pk'])
+        item = MenuPelicula.objects.filter(menu_id=kwargs['pk']).order_by('-vistas')
         # pdb.set_trace()
         page = self.paginate_queryset(item)
         serializer = MenuPeliculaSerializer(page, many=True)
         return self.get_paginated_response(serializer.data)
 
+    @action(methods=['get'], detail=False,url_path='vista_categoria/(?P<id>[^/.]+)')
+    def vista_categoria(self, request, id=None ): 
+        obj_mp = MenuPelicula.objects.get(pk=id)
+        obj_mp.vistas = obj_mp.vistas + 1
+        obj_mp.save()
+        serializer = MenuPeliculaSerializer(obj_mp)
+        return Response(serializer.data)
 
 
 class PeliculaViewSet(ModelViewSetClass):

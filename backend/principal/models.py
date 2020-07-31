@@ -52,7 +52,8 @@ class MenuPelicula(BaseModel):
         on_delete=models.CASCADE,
         related_name='mp_pelicula'
     )
-
+    vistas = models.IntegerField(default = 0, blank=True, null=True)  
+    
     def __str__(self):
         """Return post title."""
         return '{} - {}'.format(self.menu.nombre, self.pelicula.titulo )
