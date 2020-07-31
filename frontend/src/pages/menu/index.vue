@@ -48,6 +48,7 @@ export default {
   mounted () {
     this.$store.commit('head/texto', 'Peliculas de '+this.categoria)
     this.getPeliculas()
+    
   },
   methods: {
     async getPeliculas (pag = 1) {
@@ -67,6 +68,7 @@ export default {
         this.$router.push({ name: item.pelicula.ruta, params: { id: (item.pelicula_id).toString() } })
       } catch ({ message }) {
         console.error(message)
+        this.$router.push({ name: item.pelicula.ruta, params: { id: (item.pelicula_id).toString() } })
       }
     }
   }
