@@ -2,11 +2,15 @@ from django.contrib import admin
 
 from .models import Pelicula, Menu, MenuPelicula, Busqueda
 
+class MenuInlineAdmin(admin.TabularInline):
+    model = MenuPelicula
+    extra = 1
 
 class PeliculaAdmin(admin.ModelAdmin):
     list_display=('titulo','subtitulo')
     list_filter = ('carousel',)
     search_fields = ("titulo", )
+    inlines = (MenuInlineAdmin,)
 
 
 class MenuAdmin(admin.ModelAdmin):
