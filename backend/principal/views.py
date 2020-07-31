@@ -14,7 +14,7 @@ import pdb
 
 class MenuViewSet(ModelViewSetClass):
     # permission_classes = ()
-    queryset = Menu.objects.filter(delete=None)
+    queryset = Menu.objects.filter(delete=None).order_by('created')
     serializer_class = MenuSerializer
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ['nombre']

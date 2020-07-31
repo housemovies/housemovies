@@ -1,8 +1,22 @@
 <template>
   <div >
-    <div class="q-video" style="height: 500px;">
+    <!-- <div class="q-video" style="height: 500px;">
       <iframe src="https://embed.mystream.to/e6jtjwceqbux" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
-    </div>
+    </div> -->
+    <q-tab-panels v-model="tab2" animated >
+      <q-tab-panel :name="item.servidor" v-for="(item, key) in pelicula.sp_pelicula" :key="key" >
+        <div class="q-video" style="height: 500px;">
+          <iframe src="https://embed.mystream.to/e6jtjwceqbux" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+        </div>  
+      </q-tab-panel>
+    </q-tab-panels>
+    <q-tabs
+      v-model="tab2"
+      indicator-color="yellow"
+      class="bg-primary text-white shadow-2"
+    >
+      <q-tab :name="item.servidor" icon="videocam" :label="item.servidor" v-for="(item, key) in pelicula.sp_pelicula" :key="key" />     
+    </q-tabs>
     <div>
       <div class="col-12">
         <div class="q-pa-md">
@@ -115,7 +129,8 @@ export default {
     return { 
       pelicula: {},
       tab: 'sinopsis',
-      splitterModel: 20
+      splitterModel: 20,
+      tab2: ''
     }
   },
   props: {
@@ -131,6 +146,7 @@ export default {
     async getPelicula () {
       try {
         this.pelicula = await this.Get('principal/pelicula/' + this.id)
+        this.tab2 = this.pelicula.sp_pelicula[0].servidor
       } catch ({ message }) {
         console.error(message)
       }

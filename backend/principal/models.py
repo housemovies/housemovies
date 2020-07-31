@@ -16,6 +16,7 @@ class Pelicula(BaseModel):
     carousel = models.BooleanField(help_text="carousel",default=False)
     imagen_carousel = models.FileField(upload_to='bita_archivos', blank=True, null=True)
     
+    
     def __str__(self):
         """Return post title."""
         return '{}'.format(self.titulo, )
@@ -59,6 +60,44 @@ class MenuPelicula(BaseModel):
     class Meta:
         """Meta class."""
         db_table = 'principal_menus_peliculas'
+
+class Servidor(BaseModel):
+    nombre = models.CharField(max_length=240, blank=True, null=True)
+    servidor_pelicula = models.ManyToManyField(
+        Pelicula,
+        through='ServidorPelicula',
+        through_fields=('servidor', 'pelicula'),
+    )
+
+    def __str__(self):
+        """Return post title."""
+        return '{}'.format(self.nombre, )
+
+    class Meta:
+        """Meta class."""
+        db_table = 'principal_servidores'
+        ordering = ['-created', '-modified']
+
+class ServidorPelicula(BaseModel):
+    servidor = models.ForeignKey(
+        Servidor,
+        on_delete=models.CASCADE,
+        related_name='sp_servidor'
+    )
+    pelicula = models.ForeignKey(
+        Pelicula,
+        on_delete=models.CASCADE,
+        related_name='sp_pelicula'
+    )
+    link = models.TextField(blank=True, null=True, help_text="link del embed")
+
+    def __str__(self):
+        """Return post title."""
+        return '{} - {}'.format(self.servidor.nombre, self.pelicula.titulo )
+
+    class Meta:
+        """Meta class."""
+        db_table = 'principal_servidores_peliculas'
 
 class Busqueda(BaseModel):
     texto = models.CharField(max_length=240, blank=True, null=True)

@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from principal.models import Menu, MenuPelicula, Pelicula
+from principal.models import Menu, MenuPelicula, Pelicula, ServidorPelicula
 from django.conf import settings
 
 
@@ -64,6 +64,22 @@ class MenuPeliculaBasicoSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('id',)
 
+class ServidorPeliculaBasicoSerializer(serializers.ModelSerializer):
+    # menu = MenuSerializer()
+    servidor = serializers.SlugRelatedField(
+        read_only=True,
+        slug_field='nombre'
+    )
+    class Meta:
+        model = ServidorPelicula
+        fields = (
+            'id',
+            'servidor',
+            'servidor_id',
+            'link'
+        )
+        read_only_fields = ('id',)
+
 class PeliculaSerializer(serializers.ModelSerializer):
     # imagen = serializers.FileField()
     imagen = serializers.SerializerMethodField('get_imagen', read_only=True)
@@ -73,6 +89,7 @@ class PeliculaSerializer(serializers.ModelSerializer):
             return '%s%s' % (settings.MEDIA_URL, obj.imagen)
 
     mp_pelicula = MenuPeliculaBasicoSerializer(many= True)
+    sp_pelicula = ServidorPeliculaBasicoSerializer(many= True)
     """pelicula model serializer."""
     class Meta:
         """Meta class."""
@@ -87,9 +104,10 @@ class PeliculaSerializer(serializers.ModelSerializer):
             'sinopsis',
             'reparto',
             'mp_pelicula',
+            'sp_pelicula',
             'imagen',
             'triller',
-            'imagen_carousel'
+            'imagen_carousel',
         )
 
 
