@@ -31,7 +31,6 @@ class MenuPeliculaViewSet(ModelViewSetClass):
 
     def retrieve(self, request, *args, **kwargs):
         item = MenuPelicula.objects.filter(menu_id=kwargs['pk']).order_by('-vistas')
-        # pdb.set_trace()
         page = self.paginate_queryset(item)
         serializer = MenuPeliculaSerializer(page, many=True)
         return self.get_paginated_response(serializer.data)
