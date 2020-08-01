@@ -43,6 +43,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "django",
     "152.44.33.184",
+    "house-movies.com"
 ]
 # Application definition
 
