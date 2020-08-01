@@ -6,7 +6,7 @@
     <q-tab-panels v-model="tab2" animated >
       <q-tab-panel :name="item.servidor" v-for="(item, key) in pelicula.sp_pelicula" :key="key" >
         <div class="q-video" style="height: 500px;">
-          <iframe src="https://embed.mystream.to/e6jtjwceqbux" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+          <iframe :src="item.link" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
         </div>  
       </q-tab-panel>
     </q-tab-panels>
