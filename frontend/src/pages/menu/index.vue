@@ -65,7 +65,7 @@ export default {
       try {
         await this.Get(`principal/peliculas/vista_categoria/${item.id}`)
         this.$router.push({ name: item.pelicula.ruta, params: { id: (item.pelicula_id).toString() } })
-        console.log('guardo')
+        // console.log('guardo')
       } catch ({ message }) {
         console.error(message)
         this.$router.push({ name: item.pelicula.ruta, params: { id: (item.pelicula_id).toString() } })

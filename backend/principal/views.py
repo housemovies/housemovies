@@ -34,6 +34,7 @@ class MenuPeliculaViewSet(ModelViewSetClass):
         page = self.paginate_queryset(item)
         serializer = MenuPeliculaSerializer(page, many=True)
         return self.get_paginated_response(serializer.data)
+        
 
     @action(methods=['get'], detail=False,url_path='vista_categoria/(?P<id>[^/.]+)')
     def vista_categoria(self, request, id=None ): 
