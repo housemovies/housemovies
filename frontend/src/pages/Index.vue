@@ -1,7 +1,7 @@
 <template>
 
   <div class="q-pa-md">
-    <div class="row q-pl-xl q-pr-xl q-pb-sm justify-center text-h6">
+    <div class="row q-pl-xl q-pr-xl q-pb-sm justify-center text-h6 text-white">
       Ultimas Peliculas
     </div>
     <q-carousel
@@ -14,10 +14,10 @@
       :autoplay="true"
       arrows
       height="260px"
-      class="bg-grey-2 rounded-borders"
       infinite
+      style="background-color: rgba(0, 0, 0, 0.3);"
     > 
-      <q-carousel-slide :name="1" class="column no-wrap q-pl-sm rounded-borders">
+      <q-carousel-slide :name="1" >
         <div class="row items-start q-gutter-md justify-center">
           <q-card class="my-card" v-for="(item, key) in top1" :key="key" v-ripple clickable @click="redirigir(item)" >
             <q-img :src="item.imagen" style="height: 230px;">
@@ -52,7 +52,7 @@
       </q-carousel-slide> 
     </q-carousel>
 
-    <div class="row q-pl-xl q-pr-xl q-pb-sm q-pt-sm justify-center text-h6">
+    <div class="row q-pl-xl q-pr-xl q-pb-sm q-pt-sm justify-center text-h6 text-white">
       Mas Vistas
     </div>
 
@@ -65,7 +65,7 @@
         </q-img>
       </q-card>
     </div>
-    <div class="q-pa-lg flex flex-center">
+    <div class="q-pa-lg flex flex-center ">
       <q-pagination
         v-model="pagina"
         :max="max_pagina"

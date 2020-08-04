@@ -1,6 +1,6 @@
 <template>
-  <div class="position-relative bg-grey-" :style="style">
-    <div class="WAL" style="height: 50%">
+  <div class="position-relative" :style="style">
+    <div class="WAL" style="height: 50%;">
       <q-carousel
         animated
         v-model="slide"
@@ -12,33 +12,37 @@
         @mouseenter="autoplay = false"
         @mouseleave="autoplay = true"
         style="height: 550px;opacity: 0.9;"
-      >
-        <q-carousel-slide position="top" :name="key"  v-for="(item, key) in imagenes" :key="key"  :img-src="item.imagen_carousel" >
-          <br><br><br>
-          <div class="col-12 col-sm-12  text-h3 q-pl-xl q-pa-md  text-white ">
-            {{item.titulo}}
-          </div>
-          <div class="col-12  text-subtitle1 q-pl-xl  q-pb-md text-white ">
-            <q-icon class="text-h6 q-pb-sm" color="white" name="theaters" /> {{item.año}} <q-icon class="text-h6 q-pb-sm" color="white" name="alarm" /> {{item.duracion}}
-          </div>
-          <div class="col-12  text-subtitle1 q-pl-xl q-pb-md text-white ">
-            {{item.sinopsis}}
-          </div>
-          <div class="col-2 text-subtitle2 q-pl-xl text-white">
-            <q-btn clickable  outline rounded  color="white" size="md" label="Ver Pelicula" style="margin-left: 5px;"  type="a" target="_blank" @click="redirigir(item)" />
-            <q-btn clickable  outline rounded  color="white" size="md" label="Ver Triller" style="margin-left: 5px;"  type="a" target="_blank"  :href="item.triller" />
+      > 
+        <q-carousel-slide class="q-pa-xl"  position="top" :name="key"  v-for="(item, key) in imagenes" :key="key"  :style="`background-image: linear-gradient(to bottom,rgba(0,0,0,0) 70%, #69140f 100%), url(${item.imagen_carousel})`"  >
+          <div class="col-6 rounded-borders" style="background-color: rgba(0,0,0,0.7);width: 45%;float: right;" >
+            <div class="col-6 col-sm-6  text-h3 q-pl-sm q-pa-md  text-white">
+              {{item.titulo}}
+            </div>
+            <div class="col-6  text-subtitle1 q-pl-md  q-pb-md text-white ">
+              <q-icon class="text-h6 q-pb-sm" color="white" name="theaters" /> {{item.año}} <q-icon class="text-h6 q-pb-sm" color="white" name="alarm" /> {{item.duracion}}
+            </div>
+            <div class="col-6  text-subtitle1 q-pl-md q-pb-md text-white " >
+              <p id="puntos" style="height: 115px;">
+                {{item.sinopsis}}
+              </p>
+            </div>
+            <div class="col-2 text-subtitle2 q-pl-md text-white">
+              <q-btn clickable  outline rounded  color="white" size="md" label="Ver Pelicula" style="margin-left: 5px;"  type="a" target="_blank" @click="redirigir(item)" />
+              <q-btn clickable  outline rounded  color="white" size="md" label="Ver Triller" style="margin-left: 5px;"  type="a" target="_blank"  :href="item.triller" />
+            </div>
+            </br>
           </div>
         </q-carousel-slide>
       </q-carousel>
     </div>
     <q-layout view="lHh Lpr lFf" class="WAL__layout shadow-9 q-mb-sm" style="height: 70%;margin-bottom: 2%;" container>
-      <q-header elevated>
-        <q-toolbar class="bg-grey-3 text-black row ">
+      <q-header elevated >
+        <q-toolbar class="text-black row bg-yellow-12" >
           <div class="col-1">
             <q-btn v-if="leftDrawerOpen == true" round flat icon="close" class="WAL__drawer-close" @click="leftDrawerOpen = !leftDrawerOpen"  />
             <q-btn v-if="leftDrawerOpen == false" round flat icon="menu" class="q-mr-sm" @click="leftDrawerOpen = !leftDrawerOpen" />
           </div>
-          <div class="col-7 text-h5 q-pl-sm">
+          <div class="col-7  text-h5 q-pl-sm">
             {{texto}}
           </div>
           <div class="col-4">
@@ -69,7 +73,7 @@
                     No results
                   </q-item-section>
                 </q-item> -->
-                <q-item :name="key"  v-for="(item, key) in opciones" :key="key"  @click="redirigir(item)" clickable v-ripple>
+                <q-item :name="key"  v-for="(item, key) in opciones" :key="key"  @click="redirigir(item)" clickable v-ripple style="background-color: #FFEE05;">
                   <q-item-section class="col-3" >
                     <q-avatar square  size="80px">
                       <img :src="`/media/${item.imagen}`">
@@ -97,9 +101,10 @@
         v-model="leftDrawerOpen"
         bordered
         :breakpoint="690"
-        content-class="bg-grey-2"
+        content-style="background: rgba(0,0,0,0.7);"
+        content-class="text-white"
       >
-        <q-toolbar class="bg-grey-3">
+        <q-toolbar >
           <q-avatar class="cursor-pointer">
             <img src="https://cdn.quasar.dev/app-icons/icon-128x128.png" />
           </q-avatar>
@@ -123,7 +128,7 @@
         </q-scroll-area>
       </q-drawer>
 
-      <q-page-container class="bg-grey-2">
+      <q-page-container style="background-color: rgba(0,0,0,0.7);">
         <router-view :key="$route.fullPath" />
       </q-page-container>
 
@@ -208,8 +213,19 @@ export default {
 
 <style lang="sass">
 
+.q-drawer
+  background: #69140f !important
+
+p
+    max-height: 150px;
+    overflow: auto;
+    line-height: 1.2rem;
+    margin-bottom: 0rem;
+
+
 ::-webkit-scrollbar 
   display: none
+
 .my-card
   width: 100%
   max-width: 165px
@@ -218,6 +234,16 @@ export default {
 .WAL
   width: 100%
   padding-bottom: 20px
+
+  &:before
+    content: ''
+    height: 1270px
+    position: fixed
+    top: 0
+    width: 100%
+    background-color: #69140f
+
+
   &__layout
     margin: 0 auto
     z-index: 4000

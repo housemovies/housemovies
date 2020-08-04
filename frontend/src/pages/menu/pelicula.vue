@@ -4,7 +4,7 @@
       <iframe src="https://embed.mystream.to/e6jtjwceqbux" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
     </div> -->
     <q-tab-panels v-model="tab2" animated >
-      <q-tab-panel :name="item.servidor" v-for="(item, key) in pelicula.sp_pelicula" :key="key" >
+      <q-tab-panel class="q-pa-none" :name="item.servidor" v-for="(item, key) in pelicula.sp_pelicula" :key="key" >
         <div class="q-video" style="height: 500px;">
           <iframe :src="item.link" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
         </div>  
@@ -13,7 +13,7 @@
     <q-tabs
       v-model="tab2"
       indicator-color="yellow"
-      class="bg-primary text-white shadow-2"
+      class="bg-yellow-12 text-black shadow-2"
     >
       <q-tab :name="item.servidor" icon="videocam" :label="item.servidor" v-for="(item, key) in pelicula.sp_pelicula" :key="key" />     
     </q-tabs>
@@ -21,7 +21,7 @@
       <div class="col-12">
         <div class="q-pa-md">
           <q-markup-table flat bordered>
-            <thead class="bg-teal">
+            <thead >
               <tr>
                 <th rowspan="4" style="width: 200px;">
                   <q-img
@@ -77,11 +77,11 @@
           <q-tabs
             v-model="tab"
             vertical
-            class="text-teal"
+            class="text-white"
           >
             <q-tab name="sinopsis" icon="text_snippet" label="Sinópsis" />
             <q-tab name="reparto" icon="supervisor_account" label="Reparto" />
-            <q-tab name="descargas" icon="cloud_download" label="Descargas" />
+            <!-- <q-tab name="descargas" icon="cloud_download" label="Descargas" /> -->
           </q-tabs>
         </template>
 
@@ -108,10 +108,10 @@
               </p>
             </q-tab-panel>
 
-            <q-tab-panel name="descargas">
+            <!-- <q-tab-panel name="descargas">
               <div class="text-h4 q-mb-md">Descargas</div>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing e.</p>
-             </q-tab-panel>
+             </q-tab-panel> -->
           </q-tab-panels>
         </template>
 

@@ -1,6 +1,6 @@
 <template>
   <q-list padding>
-    <q-item v-for="(item, key) in modulos" :key="key" v-ripple clickable @click="activar(item)">
+    <q-item v-for="(item, key) in modulos" :key="key" v-ripple clickable @click="activar(item)" >
       <q-item-section avatar>
         <q-icon color="grey" :name="item.icono" />
       </q-item-section>

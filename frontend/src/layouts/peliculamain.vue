@@ -13,12 +13,12 @@
         @mouseenter="autoplay = false"
         @mouseleave="autoplay = true"
       >
-        <q-carousel-slide :name="key"  v-for="(item, key) in imagenes" :key="key"  :img-src="item.imagen_carousel" />
+        <q-carousel-slide :name="key"  v-for="(item, key) in imagenes" :key="key"   :style="`background-image: linear-gradient(to bottom,rgba(0,0,0,0) 70%, #69140f 100%), url(${item.imagen_carousel})`" />
       </q-carousel>
     </div>
     <q-layout view="lHh Lpr lFf" class="WAL__layout shadow-9" container>
       <q-header elevated>
-        <q-toolbar class="bg-grey-3 text-black">
+        <q-toolbar class="text-black row bg-yellow-12">
           <q-btn v-if="leftDrawerOpen == true" round flat icon="close" class="WAL__drawer-close" @click="leftDrawerOpen = !leftDrawerOpen"  />
           <q-btn v-if="leftDrawerOpen == false" round flat icon="menu" class="q-mr-sm" @click="leftDrawerOpen = !leftDrawerOpen" />
 
@@ -29,9 +29,10 @@
         v-model="leftDrawerOpen"
         bordered
         :breakpoint="690"
-        content-class="bg-grey-2"
+        content-style="background: rgba(0,0,0,0.7);"
+        content-class="text-white"
       >
-        <q-toolbar class="bg-grey-3">
+        <q-toolbar>
           <q-avatar class="cursor-pointer">
             <img src="https://cdn.quasar.dev/app-icons/icon-128x128.png" />
           </q-avatar>
@@ -52,7 +53,7 @@
         </q-scroll-area>
       </q-drawer>
 
-      <q-page-container class="bg-grey-2">
+      <q-page-container style="background-color: rgba(0,0,0,0.7);">
         <router-view :key="$route.fullPath" />
       </q-page-container>
 
@@ -112,6 +113,11 @@ export default {
 </script>
 
 <style lang="sass">
+
+.q-drawer
+  background: #69140f !important
+
+
 .my-card
   width: 100%
   max-width: 165px
