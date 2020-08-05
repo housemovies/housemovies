@@ -96,7 +96,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.commit('head/texto', "Pagina de Inicio")
+    this.$store.commit('head/texto', "Categorias")
     this.getUltimas()
     this.getMasVistas()
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="position-relative" :style="style">
-    <div class="WAL" style="height: 50%;">
+    <div class="WAL" :style="`height: ${(control ? '400px;':'100px;')}`">
       <q-carousel
         animated
         v-model="slide"
@@ -13,9 +13,9 @@
         @mouseleave="autoplay = true"
         style="height: 550px;opacity: 0.9;"
       > 
-        <q-carousel-slide class="q-pa-xl"  position="top" :name="key"  v-for="(item, key) in imagenes" :key="key"  :style="`background-image: linear-gradient(to bottom,rgba(0,0,0,0) 70%, #69140f 100%), url(${item.imagen_carousel})`"  >
-          <div class="col-6 rounded-borders" style="background-color: rgba(0,0,0,0.7);width: 45%;float: right;" >
-            <div class="col-6 col-sm-6  text-h3 q-pl-sm q-pa-md  text-white">
+        <q-carousel-slide :class="`${(control ? 'q-pa-xl':'')}`"  position="top" :name="key"  v-for="(item, key) in imagenes" :key="key"  :style="`background-image: linear-gradient(to bottom,rgba(0,0,0,0) 70%, #69140f 100%), url(${item.imagen_carousel})`"  >
+          <div class="col-6 rounded-borders" style="background-color: rgba(0,0,0,0.7);width: 45%;float: right;" v-if="control" >
+            <div class="titu col-6 col-sm-6  text-h3 q-pl-sm q-pa-md  text-white">
               {{item.titulo}}
             </div>
             <div class="col-6  text-subtitle1 q-pl-md  q-pb-md text-white ">
@@ -30,12 +30,25 @@
               <q-btn clickable  outline rounded  color="white" size="md" label="Ver Pelicula" style="margin-left: 5px;"  type="a" target="_blank" @click="redirigir(item)" />
               <q-btn clickable  outline rounded  color="white" size="md" label="Ver Triller" style="margin-left: 5px;"  type="a" target="_blank"  :href="item.triller" />
             </div>
-            </br>
+            <br>
+          </div>
+          <div class="col-6 rounded-borders" :style="`background-color: rgba(0,0,0,0.7);float: right;margin-right: 3.5%;width : ${(control ? '45%;':'60%;')}`" v-else >
+            <div  @mouseover="ponerhoverh" class="col-6 col-sm-6  text-h6 q-pl-sm q-pa-md  text-white">
+              <div class="row">
+                <div class="titud col-6">
+                  {{item.titulo}}
+                </div>
+                <div class="col-6">
+                  <q-btn clickable  outline rounded  color="white" size="md" label="Ver Pelicula" style="margin-left: 5px;"  type="a" target="_blank" @click="redirigir(item)" />
+                  <q-btn clickable  outline rounded  color="white" size="md" label="Ver Triller" style="margin-left: 5px;"  type="a" target="_blank"  :href="item.triller" />
+                </div>
+              </div>
+            </div>
           </div>
         </q-carousel-slide>
       </q-carousel>
     </div>
-    <q-layout view="lHh Lpr lFf" class="WAL__layout shadow-9 q-mb-sm" style="height: 70%;margin-bottom: 2%;" container>
+    <q-layout @mouseover="ponerhoverb" view="lHh Lpr lFf" class="WAL__layout shadow-9 q-mb-sm" :style="`height: ${(control ? '53%;':'87%;')};margin-bottom: 2%;`" container>
       <q-header elevated >
         <q-toolbar class="text-black row bg-yellow-12" >
           <div class="col-1">
@@ -154,13 +167,17 @@ export default {
       autoplay: true,
       imagenes: [],
       options: [],
-      opciones: []
+      opciones: [],
+      posicion: 0, 
+      posicionNueva : 0,
+      control: true,
     }
   },
   computed: {
     ...mapGetters('menu', ['sub_menu_active']),
     ...mapGetters('head', ['texto']),
     style () {
+      console.log(this.$q)
       return {
         height: this.$q.screen.height + 'px'
       }
@@ -169,8 +186,28 @@ export default {
   mounted () {
     this.getMenus()
     this.getImagenesMuestra()
+    // const $this = this
+    // window.addEventListener('scroll', function(e){
+    //   var scrollPos = window.scrollY
+    //   var docHeight = document.documentElement.scrollHeight
+    //   console.log(scrollPos, docHeight, window.pageYOffset)
+    //   if ($this.control) {
+    //     $this.posicionNueva = scrollPos
+    //     if($this.posicionNueva >= 85) {
+    //       $this.control = false
+    //     } else {
+    //       console.log($this.posicionNueva)
+    //     } 
+    //   }
+    // })
   },
   methods: {
+    ponerhoverh () {
+      this.control = true
+    },
+    ponerhoverb () {
+      this.control = false
+    },
     async getMenus () {
       try {
         const data = await this.Get('principal/menus')
@@ -217,11 +254,22 @@ export default {
   background: #69140f !important
 
 p
-    max-height: 150px;
-    overflow: auto;
-    line-height: 1.2rem;
-    margin-bottom: 0rem;
+  max-height: 150px;
+  overflow: auto;
+  line-height: 1.2rem;
+  margin-bottom: 0rem;
 
+.titu
+  width: 95%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+.titud
+  width: 55%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
 ::-webkit-scrollbar 
   display: none
