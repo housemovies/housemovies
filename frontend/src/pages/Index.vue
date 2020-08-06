@@ -19,7 +19,7 @@
     > 
       <q-carousel-slide :name="1" >
         <div class="row items-start q-gutter-md justify-center">
-          <q-card class="my-card" v-for="(item, key) in top1" :key="key" v-ripple clickable @click="redirigir(item)" >
+          <q-card class="my-card col-xs-5 col-sm-2 col-md-2 col-lg-2 col-xl-2" v-for="(item, key) in top1" :key="key" v-ripple clickable @click="redirigir(item)" >
             <q-img :src="item.imagen" style="height: 230px;">
               <div class="text-h7 absolute-bottom text-right">
                 {{item.titulo}}
@@ -30,7 +30,7 @@
       </q-carousel-slide>
      <q-carousel-slide :name="2" class="column no-wrap">
         <div class="row items-start q-gutter-md justify-center">
-          <q-card class="my-card" v-for="(item, key) in top2" :key="key" v-ripple clickable @click="redirigir(item)" >
+          <q-card class="my-card col-xs-5 col-sm-2 col-md-2 col-lg-2 col-xl-2" v-for="(item, key) in top2" :key="key" v-ripple clickable @click="redirigir(item)" >
             <q-img :src="item.imagen" style="height: 230px;">
               <div class="text-h7 absolute-bottom text-right">
                 {{item.titulo}}
@@ -41,7 +41,7 @@
       </q-carousel-slide>
       <q-carousel-slide :name="3" class="column no-wrap">
         <div class="row items-start q-gutter-md justify-center">
-          <q-card class="my-card" v-for="(item, key) in top3" :key="key" v-ripple clickable @click="redirigir(item)" >
+          <q-card class="my-card col-xs-5 col-sm-2 col-md-2 col-lg-2 col-xl-2" v-for="(item, key) in top3" :key="key" v-ripple clickable @click="redirigir(item)" >
             <q-img :src="item.imagen" style="height: 230px;">
               <div class="text-h7 absolute-bottom text-right">
                 {{item.titulo}}
@@ -57,7 +57,7 @@
     </div>
 
     <div class="q-pa-md row items-start q-gutter-md justify-center">
-      <q-card class="my-card" v-for="(item, key) in vistas" :key="key" v-ripple clickable @click="redirigir(item)" >
+      <q-card class="my-card col-xs-5 col-sm-2 col-md-2 col-lg-2 col-xl-2" v-for="(item, key) in vistas" :key="key" v-ripple clickable @click="redirigir(item)" >
         <q-img :src="item.imagen" style="height: 230px;">
           <div class="text-h7 absolute-bottom text-right">
             {{item.titulo}}

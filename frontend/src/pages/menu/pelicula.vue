@@ -31,18 +31,20 @@
                     :src="pelicula.imagen"
                   />
                 </th>
-                <th class="text-left text-h3 row" style="padding: 10px 6px !important;">                  
-                  <div class="col-10 text-h4">
-                    {{pelicula.titulo}}
-                  </div>
-                  <div class="col-2 text-subtitle2">
-                    <q-btn clickable  outline rounded  color="black" size="md" label="Triller" style="margin-left: 5px;"  type="a" target="_blank" :href="pelicula.triller" />
-                  </div>
-                  <div v-if="pelicula.subtitulo" class="col-12 text-subtitle2">
-                    {{pelicula.subtitulo}}
-                  </div>
-                  <div class="col-12 text-subtitle2">
-                    Año: {{pelicula.año}} - Duración: {{pelicula.duracion}}
+                <th class="text-left text-h3" style="padding: 10px 6px !important;">   
+                  <div class="row">
+                    <div class="titu col-8 text-h4">
+                      {{pelicula.titulo}}
+                    </div>
+                    <div class="col-4 text-subtitle2">
+                      <q-btn clickable  outline rounded  color="black" size="md" label="Triller" style="margin-left: 5px;"  type="a" target="_blank" :href="pelicula.triller" />
+                    </div>
+                    <div v-if="pelicula.subtitulo" class="col-12 text-subtitle2">
+                      {{pelicula.subtitulo}}
+                    </div>
+                    <div class="col-12 text-subtitle2">
+                      Año: {{pelicula.año}} - Duración: {{pelicula.duracion}}
+                    </div>
                   </div>
                 </th>
               </tr>

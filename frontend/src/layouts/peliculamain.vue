@@ -119,8 +119,6 @@ export default {
 
 
 .my-card
-  width: 100%
-  max-width: 165px
   height: 230px
   
 .WAL

@@ -1,6 +1,6 @@
 <template>
   <div class="position-relative" :style="style">
-    <div class="WAL" :style="`height: ${(control ? '400px;':'100px;')}`">
+    <div class="WAL" :style="`height: ${(control ? '300px;':'100px;')}`">
       <q-carousel
         animated
         v-model="slide"
@@ -13,34 +13,37 @@
         @mouseleave="autoplay = true"
         style="height: 550px;opacity: 0.9;"
       > 
-        <q-carousel-slide :class="`${(control ? 'q-pa-xl':'')}`"  position="top" :name="key"  v-for="(item, key) in imagenes" :key="key"  :style="`background-image: linear-gradient(to bottom,rgba(0,0,0,0) 70%, #69140f 100%), url(${item.imagen_carousel})`"  >
-          <div class="col-6 rounded-borders" style="background-color: rgba(0,0,0,0.7);width: 45%;float: right;" v-if="control" >
-            <div class="titu col-6 col-sm-6  text-h3 q-pl-sm q-pa-md  text-white">
-              {{item.titulo}}
+        <q-carousel-slide  position="top" :name="key"  v-for="(item, key) in imagenes" :key="key"  :style="`background-image: linear-gradient(to bottom,rgba(0,0,0,0) 70%, #69140f 100%), url(${item.imagen_carousel})`"  >
+          <div class="row" style="flex-wrap: initial;" @mouseover="ponerhoverh" >
+            <div class="col-3 col-lg-5">&nbsp;</div>
+            <div class="col-xs-9 col-sm-9 col-md-8 col-lg-5 col-xl-4 rounded-borders" style="background-color: rgba(0,0,0,0.7);" v-if="control" >
+              <div class="titu col-6 col-sm-6  text-h3 q-pl-sm q-pa-md  text-white">
+                {{item.titulo}}
+              </div>
+              <div class="col-6  text-subtitle1 q-pl-md  q-pb-md text-white ">
+                <q-icon class="text-h6 q-pb-sm" color="white" name="theaters" /> {{item.año}} <q-icon class="text-h6 q-pb-sm" color="white" name="alarm" /> {{item.duracion}}
+              </div>
+              <div class="col-6  text-subtitle1 q-pl-md q-pb-md text-white " >
+                <p id="puntos" style="height: 75px;">
+                  {{item.sinopsis}}
+                </p>
+              </div>
+              <div class="col-2 text-subtitle2 q-pl-md text-white">
+                <q-btn clickable  outline rounded  color="white" size="md" label="Ver Pelicula" style="margin-left: 5px;"  type="a" target="_blank" @click="redirigir(item)" />
+                <q-btn clickable  outline rounded  color="white" size="md" label="Ver Triller" style="margin-left: 5px;"  type="a" target="_blank"  :href="item.triller" />
+              </div>
+              <br>
             </div>
-            <div class="col-6  text-subtitle1 q-pl-md  q-pb-md text-white ">
-              <q-icon class="text-h6 q-pb-sm" color="white" name="theaters" /> {{item.año}} <q-icon class="text-h6 q-pb-sm" color="white" name="alarm" /> {{item.duracion}}
-            </div>
-            <div class="col-6  text-subtitle1 q-pl-md q-pb-md text-white " >
-              <p id="puntos" style="height: 115px;">
-                {{item.sinopsis}}
-              </p>
-            </div>
-            <div class="col-2 text-subtitle2 q-pl-md text-white">
-              <q-btn clickable  outline rounded  color="white" size="md" label="Ver Pelicula" style="margin-left: 5px;"  type="a" target="_blank" @click="redirigir(item)" />
-              <q-btn clickable  outline rounded  color="white" size="md" label="Ver Triller" style="margin-left: 5px;"  type="a" target="_blank"  :href="item.triller" />
-            </div>
-            <br>
-          </div>
-          <div class="col-6 rounded-borders" :style="`background-color: rgba(0,0,0,0.7);float: right;margin-right: 3.5%;width : ${(control ? '45%;':'60%;')}`" v-else >
-            <div  @mouseover="ponerhoverh" class="col-6 col-sm-6  text-h6 q-pl-sm q-pa-md  text-white">
-              <div class="row">
-                <div class="titud col-6">
-                  {{item.titulo}}
-                </div>
-                <div class="col-6">
-                  <q-btn clickable  outline rounded  color="white" size="md" label="Ver Pelicula" style="margin-left: 5px;"  type="a" target="_blank" @click="redirigir(item)" />
-                  <q-btn clickable  outline rounded  color="white" size="md" label="Ver Triller" style="margin-left: 5px;"  type="a" target="_blank"  :href="item.triller" />
+            <div class="col-xs-9 col-sm-9 col-md-8 col-lg-5 col-xl-4 rounded-borders" :style="`background-color: rgba(0,0,0,0.7);`" v-else >
+              <div   class="text-h6 q-pl-sm q-pa-md  text-white">
+                <div class="row">
+                  <div class="titud col-xs-6 col-sm-5 col-md-7 col-lg-7 col-xl-6">
+                    {{item.titulo}}
+                  </div>
+                  <div class="col-xs-6 col-sm-7 col-md-5 col-lg-5 col-xl-6">
+                    <q-btn clickable  outline rounded  color="white" size="sm" label="Ver Pelicula" style="margin-left: 5px;"  type="a" target="_blank" @click="redirigir(item)" />
+                    <q-btn clickable  outline rounded  color="white" size="sm" label="Ver Triller" style="margin-left: 5px;"  type="a" target="_blank" class="gt-sm"  :href="item.triller" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -48,7 +51,7 @@
         </q-carousel-slide>
       </q-carousel>
     </div>
-    <q-layout @mouseover="ponerhoverb" view="lHh Lpr lFf" class="WAL__layout shadow-9 q-mb-sm" :style="`height: ${(control ? '53%;':'87%;')};margin-bottom: 2%;`" container>
+    <q-layout @mouseover="ponerhoverb" view="lHh Lpr lFf" class="WAL__layout shadow-9 q-mb-sm" :style="`height: ${(control ? '60%;':'84%;')};margin-bottom: 2%;`" container>
       <q-header elevated >
         <q-toolbar class="text-black row bg-yellow-12" >
           <div class="col-1">
@@ -254,7 +257,7 @@ export default {
   background: #69140f !important
 
 p
-  max-height: 150px;
+  max-height: 75px;
   overflow: auto;
   line-height: 1.2rem;
   margin-bottom: 0rem;
@@ -275,8 +278,6 @@ p
   display: none
 
 .my-card
-  width: 100%
-  max-width: 165px
   height: 230px
   
 .WAL
@@ -310,10 +311,14 @@ p
     &__layout
       width: 100%
       border-radius: 0
+
+
 @media (min-width: 691px)
   .WAL
     &__drawer-open
       display: none
+
+
 .conversation__summary
   margin-top: 4px
 .conversation__more
