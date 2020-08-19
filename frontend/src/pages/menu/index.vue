@@ -1,8 +1,8 @@
 <template>
 <div class="q-pa-md">
   <div class="q-pa-md row items-start q-gutter-md justify-center">
-    <q-card class="my-card" v-for="(item, key) in listado" :key="key" v-ripple clickable @click="dirigir(item)" >
-      <q-img :src="item.pelicula.imagen" style="height: 230px;">
+    <q-card class="my-card col-xs-5 col-sm-2 col-md-2 col-lg-2 col-xl-2" v-for="(item, key) in listado" :key="key" v-ripple clickable @click="dirigir(item)" >
+      <q-img :src="item.pelicula.imagen">
         <div class="text-h7 absolute-bottom text-right">
           {{item.pelicula.titulo}}
         </div>
@@ -14,6 +14,8 @@
       v-model="pagina"
       :max="max_pagina"
       :input="true"
+      color="white"
+      input-class="text-white"
     />
   </div>
 </div>
