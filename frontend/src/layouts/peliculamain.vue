@@ -24,7 +24,17 @@
             <q-btn v-if="leftDrawerOpen == false" round flat icon="menu" class="q-mr-sm" @click="leftDrawerOpen = !leftDrawerOpen" />
           </div>
           <div class="col-7  text-h5 q-pl-sm">
-            &nbsp;
+            <q-img
+              src="~assets/logo128.png"
+              style="height: 68px; max-width: 80px"
+            >
+              <template v-slot:loading>
+                <div class="text-yellow">
+                  <q-spinner-ios />
+                  <div class="q-mt-md">Loading...</div>
+                </div>
+              </template>
+            </q-img>
           </div>
           <div class="col-4">
             <q-select
