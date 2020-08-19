@@ -15,8 +15,59 @@
       > 
         <q-carousel-slide  position="top" :name="key"  v-for="(item, key) in imagenes" :key="key"  :style="`background-image: linear-gradient(to bottom,rgba(0,0,0,0) 70%, #69140f 100%), url(${item.imagen_carousel})`"  >
           <div class="row" style="flex-wrap: initial;" @mouseover="ponerhoverh" >
-            <div class="col-3 col-lg-5">&nbsp;</div>
-            <div class="col-xs-9 col-sm-9 col-md-8 col-lg-5 col-xl-4 rounded-borders" style="background-color: rgba(0,0,0,0.7);" v-if="control" >
+            <div class="col-lg-2 col-xl-2 " >&nbsp;</div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-2 text-center" v-if="control == false" >
+              <q-img
+                src="~assets/logo128.png"
+                style="height: 70px; max-width: 80px"
+              >
+                <template v-slot:loading>
+                  <div class="text-yellow">
+                    <q-spinner-ios />
+                    <div class="q-mt-md">Loading...</div>
+                  </div>
+                </template>
+              </q-img>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-2 text-center " v-else >
+              <q-img
+                src="~assets/logo256.png"
+                style="height: 266px; max-width: 266px"
+                class="gt-sm"
+              >
+                <template v-slot:loading>
+                  <div class="text-yellow">
+                    <q-spinner-ios />
+                    <div class="q-mt-md">Loading...</div>
+                  </div>
+                </template>
+              </q-img>
+              <q-img
+                src="~assets/logo192.png"
+                style="height: 192px; max-width: 192px"
+                class="sm"
+              >
+                <template v-slot:loading>
+                  <div class="text-yellow">
+                    <q-spinner-ios />
+                    <div class="q-mt-md">Loading...</div>
+                  </div>
+                </template>
+              </q-img>
+              <q-img
+                src="~assets/logo128.png"
+                style="height: 128px; max-width: 128px"
+                class="xs"
+              >
+                <template v-slot:loading>
+                  <div class="text-yellow">
+                    <q-spinner-ios />
+                    <div class="q-mt-md">Loading...</div>
+                  </div>
+                </template>
+              </q-img>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-8 col-lg-6 col-xl-6 rounded-borders" style="background-color: rgba(0,0,0,0.7);" v-if="control" >
               <div class="titu col-6 col-sm-6  text-h3 q-pl-sm q-pa-md  text-white">
                 {{item.titulo}}
               </div>
@@ -34,7 +85,7 @@
               </div>
               <br>
             </div>
-            <div class="col-xs-9 col-sm-9 col-md-8 col-lg-5 col-xl-4 rounded-borders" :style="`background-color: rgba(0,0,0,0.7);`" v-else >
+            <div class="col-xs-9 col-sm-9 col-md-8 col-lg-7 col-xl-6 rounded-borders" :style="`background-color: rgba(0,0,0,0.7);`" v-else >
               <div   class="text-h6 q-pl-sm q-pa-md  text-white">
                 <div class="row">
                   <div class="titud col-xs-6 col-sm-5 col-md-7 col-lg-7 col-xl-6">
@@ -62,11 +113,6 @@
             {{texto}}
           </div>
           <div class="col-4">
-            <!-- <q-input rounded outlined dense class="WAL__field full-width" bg-color="white" v-model="search" placeholder="Buscar Pelicula">
-              <template slot="prepend">
-                <q-icon name="search" />
-              </template>
-            </q-input> -->
             <q-select
               rounded
               outlined
@@ -84,11 +130,6 @@
                 <q-icon name="search" />
               </template>
               <template v-slot:no-option>
-                <!-- <q-item  :name="key"  v-for="(item, key) in opciones" :key="key" >
-                  <q-item-section class="text-grey" rounded>
-                    No results
-                  </q-item-section>
-                </q-item> -->
                 <q-item :name="key"  v-for="(item, key) in opciones" :key="key"  @click="redirigir(item)" clickable v-ripple style="background-color: #FFEE05;">
                   <q-item-section class="col-3" >
                     <q-avatar square  size="80px">
@@ -129,15 +170,6 @@
           </div>
           <q-space />
         </q-toolbar>
-<!-- 
-        <q-toolbar class="bg-grey-2">
-          <q-input rounded outlined dense class="WAL__field full-width" bg-color="white" v-model="search" placeholder="Buscar Pelicula">
-            <template slot="prepend">
-              <q-icon name="search" />
-            </template>
-          </q-input>
-        </q-toolbar> -->
-
         <q-scroll-area style="height: calc(100% - 100px)">
           <menu-modulos @close="leftDrawerOpen = false"/>
           
@@ -174,6 +206,7 @@ export default {
       posicion: 0, 
       posicionNueva : 0,
       control: true,
+      url: 'https://placeimg.com/500/300/nature'
     }
   },
   computed: {
@@ -189,20 +222,6 @@ export default {
   mounted () {
     this.getMenus()
     this.getImagenesMuestra()
-    // const $this = this
-    // window.addEventListener('scroll', function(e){
-    //   var scrollPos = window.scrollY
-    //   var docHeight = document.documentElement.scrollHeight
-    //   console.log(scrollPos, docHeight, window.pageYOffset)
-    //   if ($this.control) {
-    //     $this.posicionNueva = scrollPos
-    //     if($this.posicionNueva >= 85) {
-    //       $this.control = false
-    //     } else {
-    //       console.log($this.posicionNueva)
-    //     } 
-    //   }
-    // })
   },
   methods: {
     ponerhoverh () {
@@ -230,8 +249,6 @@ export default {
       this.$router.push({ name: item.ruta, params: { id: (item.id).toString() } })
     },
     async filterFn (val, update) {
-      // const filter = props.filter
-      // const { page } = props.pagination
       if (val.length > 0) {
         const opciones = {
             search: val
@@ -242,10 +259,6 @@ export default {
           this.options = []
         })
       }
-      // this.asignar_estados()
-      // this.pagination.rowsNumber = data.count
-      // this.pagination.page = page
-      // this.pagination.rowsPerPage = 10
     }
   }
 }

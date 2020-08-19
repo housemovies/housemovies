@@ -1,8 +1,5 @@
 <template>
   <div >
-    <!-- <div class="q-video" style="height: 500px;">
-      <iframe src="https://embed.mystream.to/e6jtjwceqbux" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
-    </div> -->
     <q-tab-panels v-model="tab2" animated >
       <q-tab-panel class="q-pa-none" :name="item.servidor" v-for="(item, key) in pelicula.sp_pelicula" :key="key" >
         <div class="q-video" style="height: 500px;">
@@ -17,107 +14,55 @@
     >
       <q-tab :name="item.servidor" icon="videocam" :label="item.servidor" v-for="(item, key) in pelicula.sp_pelicula" :key="key" />     
     </q-tabs>
-    <div>
-      <div class="col-12">
-        <div class="q-pa-md">
-          <q-markup-table flat bordered>
-            <thead >
-              <tr>
-                <th rowspan="4" style="width: 200px;">
-                  <q-img
-                    style="width: 165px;height: 230px"
-                    :ratio="1"
-                    class="rounded-borders"
-                    :src="pelicula.imagen"
-                  />
-                </th>
-                <th class="text-left text-h3" style="padding: 10px 6px !important;">   
-                  <div class="row">
-                    <div class="titu col-8 text-h4">
-                      {{pelicula.titulo}}
-                    </div>
-                    <div class="col-4 text-subtitle2">
-                      <q-btn clickable  outline rounded  color="black" size="md" label="Triller" style="margin-left: 5px;"  type="a" target="_blank" :href="pelicula.triller" />
-                    </div>
-                    <div v-if="pelicula.subtitulo" class="col-12 text-subtitle2">
-                      {{pelicula.subtitulo}}
-                    </div>
-                    <div class="col-12 text-subtitle2">
-                      Año: {{pelicula.año}} - Duración: {{pelicula.duracion}}
-                    </div>
-                  </div>
-                </th>
-              </tr>
-              <tr>
-                <th class="text-left" style="padding: 5px 6px !important;">
-                   <div>
-                    Generos:
-                    <q-btn v-for="(item, key) in pelicula.mp_pelicula" :key="key" clickable  outline rounded  color="black" size="sm" :label="item.menu.nombre" style="margin-left: 5px;"  @click="redirigir(item)" />
-                  </div>
-                </th>
-              </tr>
-              <tr>
-                <th class="text-left" style="padding: 5px 6px !important;">
-                  <div>
-                    Compartir: aca ban las redes sociales
-                  </div>
-                </th>
-              </tr>     
-               <tr>
-                <th class="text-left" style="padding: 5px 6px !important;">
-                </th>
-              </tr>               
-            </thead>
-          </q-markup-table>
+    <div class="row q-pa-lg">
+
+        <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3 col-xl-3" >
+          <q-img
+            style="width: 165px;height: 230px"
+            :ratio="1"
+            class="rounded-borders gt-sm"
+            :src="pelicula.imagen"
+          />
+          <q-img
+            style="width: 125px;height: 190px"
+            :ratio="1"
+            class="rounded-borders sm"
+            :src="pelicula.imagen"
+          />
+          <q-img
+            style="width: 85px;height: 150px"
+            :ratio="1"
+            class="rounded-borders xs"
+            :src="pelicula.imagen"
+          />
         </div>
-      </div>
-      <q-splitter
-        v-model="splitterModel"
-        style="height: 220px"
-      >
-        <template v-slot:before>
-          <q-tabs
-            v-model="tab"
-            vertical
-            class="text-white"
-          >
-            <q-tab name="sinopsis" icon="text_snippet" label="Sinópsis" />
-            <q-tab name="reparto" icon="supervisor_account" label="Reparto" />
-            <!-- <q-tab name="descargas" icon="cloud_download" label="Descargas" /> -->
-          </q-tabs>
-        </template>
-
-        <template v-slot:after>
-          <q-tab-panels
-            v-model="tab"
-            animated
-            swipeable
-            vertical
-            transition-prev="jump-up"
-            transition-next="jump-up"
-          >
-            <q-tab-panel name="sinopsis">
-              <div class="text-h4 q-mb-md">Sinópsis</div>
-              <p>
-                {{pelicula.sinopsis}}
-              </p>
-            </q-tab-panel>
-
-            <q-tab-panel name="reparto">
-              <div class="text-h4 q-mb-md">Reparto</div>
-              <p>
-                {{pelicula.reparto}}
-              </p>
-            </q-tab-panel>
-
-            <!-- <q-tab-panel name="descargas">
-              <div class="text-h4 q-mb-md">Descargas</div>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing e.</p>
-             </q-tab-panel> -->
-          </q-tab-panels>
-        </template>
-
-      </q-splitter>
+        <div class="col-xs-8 col-sm-9 col-md-9 col-lg-9 col-xl-9 text-white" >
+          <div class="row">
+            <div class="titu col-xs-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 text-h4"  style="color: #FAECEC;">
+              {{pelicula.titulo}}
+            </div>
+            <div class="col-2 text-subtitle2 gt-xs">
+              <q-btn clickable  outline rounded  size="md" label="Triller" style="margin-left: 5px;color: #FAECEC;"  type="a" target="_blank" :href="pelicula.triller" />
+            </div>
+            <div class="titu col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-subtitle1" style="color: #FAECEC;">
+              {{pelicula.subtitulo}}
+            </div>
+            <div class="titu col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-subtitle1" style="color: #FAECEC;">
+              <label style="color: #E18585;" >Año: </label> {{pelicula.año}}  <label style="color: #E18585;" > -  Duración:</label> {{pelicula.duracion}}
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-subtitle2" style="color: #E18585;">
+              {{pelicula.sinopsis}}
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-subtitle2" style="color: #FAECEC;">
+              <label style="color: #E18585;" >Actores: </label> 
+              {{pelicula.reparto}}
+            </div>
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-subtitle2" style="color: #E18585;">
+              <label style="color: #E18585;" >Generos: </label> 
+              <q-btn v-for="(item, key) in pelicula.mp_pelicula" :key="key" clickable  outline rounded  color="white" size="sm" :label="item.menu.nombre" style="margin-left: 5px;"  @click="redirigir(item)" />
+            </div>
+          </div>         
+        </div>
     </div>
 
   </div>

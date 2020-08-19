@@ -10,7 +10,7 @@
       transition-next="slide-left"
       swipeable
       animated
-      control-color="primary"
+      control-color="white"
       :autoplay="true"
       arrows
       height="260px"
@@ -70,6 +70,8 @@
         v-model="pagina"
         :max="max_pagina"
         :input="true"
+        color="white"
+        input-class="text-white"
       />
     </div>
   </div>

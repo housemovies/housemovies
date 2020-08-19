@@ -19,9 +19,52 @@
     <q-layout view="lHh Lpr lFf" class="WAL__layout shadow-9" container>
       <q-header elevated>
         <q-toolbar class="text-black row bg-yellow-12">
-          <q-btn v-if="leftDrawerOpen == true" round flat icon="close" class="WAL__drawer-close" @click="leftDrawerOpen = !leftDrawerOpen"  />
-          <q-btn v-if="leftDrawerOpen == false" round flat icon="menu" class="q-mr-sm" @click="leftDrawerOpen = !leftDrawerOpen" />
-
+          <div class="col-1">
+            <q-btn v-if="leftDrawerOpen == true" round flat icon="close" class="WAL__drawer-close" @click="leftDrawerOpen = !leftDrawerOpen"  />
+            <q-btn v-if="leftDrawerOpen == false" round flat icon="menu" class="q-mr-sm" @click="leftDrawerOpen = !leftDrawerOpen" />
+          </div>
+          <div class="col-7  text-h5 q-pl-sm">
+            &nbsp;
+          </div>
+          <div class="col-4">
+            <q-select
+              rounded
+              outlined
+              dense
+              v-model="search"
+              use-input
+              input-debounce="0"
+              label="Bucar Pelicula"
+              :options="options"
+              @filter="filterFn"
+              style="width: 250px"
+              class="WAL__field full-width" bg-color="white"
+            >
+              <template slot="prepend">
+                <q-icon name="search" />
+              </template>
+              <template v-slot:no-option>
+                <q-item :name="key"  v-for="(item, key) in opciones" :key="key"  @click="redirigir(item)" clickable v-ripple style="background-color: #FFEE05;">
+                  <q-item-section class="col-3" >
+                    <q-avatar square  size="80px">
+                      <img :src="`/media/${item.imagen}`">
+                    </q-avatar>
+                  </q-item-section>
+                  <q-item-section top class="col-8" >
+                    <div class="text-h6">
+                      {{item.titulo}}
+                    </div>
+                    <div v-if="_.get(item,'subtitulo',false)" class="text-subtitle1">
+                      {{item.subtitulo}}
+                    </div>
+                    <div class="text-subtitle1">
+                      <q-icon class="text-h6 q-pb-sm" color="primary" name="theaters" /> {{item.año}} <q-icon class="text-h6 q-pb-sm" color="primary" name="alarm" /> {{item.duracion}}
+                    </div>
+                  </q-item-section>
+                </q-item>
+              </template>
+            </q-select>
+          </div>
         </q-toolbar>
       </q-header>
 
@@ -77,7 +120,9 @@ export default {
       message: '',
       slide: 1,
       autoplay: true,
-      imagenes: []
+      imagenes: [],
+      options: [],
+      opciones: [],
     }
   },
   computed: {
@@ -106,6 +151,21 @@ export default {
         this.imagenes = await this.Get('principal/pelicula/carousel')
       } catch ({ message }) {
         console.error(message)
+      }
+    },
+    redirigir (item) {
+      this.$router.push({ name: item.ruta, params: { id: (item.id).toString() } })
+    },
+    async filterFn (val, update) {
+      if (val.length > 0) {
+        const opciones = {
+            search: val
+        }
+        const data = await this.Get('principal/pelicula/select', opciones)
+        this.opciones = data
+        update(() => {
+          this.options = []
+        })
       }
     }
   }
