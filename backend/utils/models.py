@@ -14,11 +14,15 @@ class BaseModel(models.Model):
     created = models.DateTimeField(
         'created at',
         auto_now_add=True,
+        null=True,
+        blank=True,
         help_text='Date time on which the object was created.'
     )
     modified = models.DateTimeField(
         'modified at',
         auto_now=True,
+        null=True,
+        blank=True,
         help_text='Date time on which the object was last modified.'
     )
 
